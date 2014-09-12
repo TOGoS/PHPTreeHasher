@@ -1,0 +1,48 @@
+<?php
+
+class TOGoS_TreeHasher
+{
+	protected $blockSize;
+	protected $hashFunction;
+	
+	public function __construct( $blockSize, $hashFunction ) {
+		$this->blockSize = $blockSize;
+		$this->hashFunction = $hashFunction;
+	}
+	
+	public function hash( $subject ) {
+		if( is_scalar($subject) ) {
+			$subject = (string)$subject;
+			$cs = new TOGoS_TreeHasher_CalcState($this->blockSize, $this->hashFunction);
+			$cs->update($subject);
+			return $cs->digest();
+		} else {
+			throw new Exception("Can't hash a ".gettype($subject));
+		}
+	}
+	
+	public function __invoke( $subject ) {
+		return $this->hash($subject);
+	}
+	
+	public static function nativeHashFunction($name) {
+		return new TOGoS_TreeHasher_NativeHashFunction($name);
+	}
+	
+	public static function tigerTree() {
+		return new TOGoS_TreeHasher(1024, self::nativeHashFunction('tiger192,3'));
+	}
+}
+
+class TOGoS_TreeHasher_NativeHashFunction
+{
+	protected $algorithmName;
+	
+	public function __construct( $algorithmName ) {
+		$this->algorithmName = $algorithmName;
+	}
+	
+	public function __invoke( $data ) {
+		return hash($this->algorithmName, $data, true);
+	}
+}
