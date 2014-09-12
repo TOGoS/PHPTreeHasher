@@ -1,4 +1,6 @@
 {
+    "name": "togos/tree-hasher",
+    "description": "Calculates THEX-style hashes of byte strings.",
     "autoload": {
 	"psr-0": {
 	    "TOGoS_TreeHasher": "lib/"
