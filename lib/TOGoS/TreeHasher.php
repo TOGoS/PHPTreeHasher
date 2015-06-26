@@ -30,6 +30,9 @@ class TOGoS_TreeHasher
 	}
 	
 	public static function tigerTree() {
+		if( PHP_VERSION_ID < 50400 ) {
+			return new TOGoS_TreeHasher(1024, new TOGoS_TreeHasher_FixedTigerHash());
+		}
 		return new TOGoS_TreeHasher(1024, self::nativeHashFunction('tiger192,3'));
 	}
 }
