@@ -11,7 +11,7 @@
  * (PD) 2003-2006 The Bitzi Corporation
  * See http://bitzi.com/publicdomain for more info.
  */
-class TOGoS_TreeHasher_CalcState
+class TOGoS_TreeHasher_CalcState implements TOGoS_Hash_Hashing
 {
 	protected $blockSize;
 	protected $hashFunction;
@@ -32,6 +32,12 @@ class TOGoS_TreeHasher_CalcState
 			$data = substr($data, $remaining);
 		}
 		$this->buffer .= $data;
+	}
+	
+	public function reset() {
+		$this->buffer = '';
+		$this->nodes = array();
+		$this->blockCount = 0;
 	}
 	
 	/**

@@ -3,6 +3,7 @@
     "description": "Calculates THEX-style hashes of byte strings.",
     "autoload": {
 	"psr-0": {
+	    "TOGoS_Hash_Hashing": "lib/",
 	    "TOGoS_TreeHasher": "lib/"
 	}
     }
