@@ -4,11 +4,9 @@ default: run-unit-tests
 	default \
 	run-unit-tests
 
-composer.lock: | composer.json
+vendor: composer.json
 	composer install
+	touch "$@"
 
-vendor/autoload.php: composer.lock
-	composer install
-
-run-unit-tests: vendor/autoload.php
+run-unit-tests: vendor
 	phpunit --bootstrap vendor/autoload.php test/
