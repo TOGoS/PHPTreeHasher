@@ -1,6 +1,6 @@
 <?php
 
-class TOGoS_TreeHasher
+class TOGoS_TreeHasher implements TOGoS_Hash_HashAlgorithm
 {
 	protected $blockSize;
 	protected $hashFunction;
@@ -10,10 +10,14 @@ class TOGoS_TreeHasher
 		$this->hashFunction = $hashFunction;
 	}
 	
+	public function newHashing() {
+		return new TOGoS_TreeHasher_CalcState($this->blockSize, $this->hashFunction);
+	}
+	
 	public function hash( $subject ) {
 		if( is_scalar($subject) ) {
 			$subject = (string)$subject;
-			$cs = new TOGoS_TreeHasher_CalcState($this->blockSize, $this->hashFunction);
+			$cs = $this->newHashing();
 			$cs->update($subject);
 			return $cs->digest();
 		} else {
