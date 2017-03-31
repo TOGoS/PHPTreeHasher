@@ -1,10 +1,13 @@
 {
-    "name": "togos/tree-hasher",
-    "description": "Calculates THEX-style hashes of byte strings.",
-    "autoload": {
-	"psr-0": {
-	    "TOGoS_Hash_": "lib/",
-	    "TOGoS_TreeHasher": "lib/"
+	"name": "togos/tree-hasher",
+	"description": "Calculates THEX-style hashes of byte strings.",
+	"autoload": {
+		"psr-0": {
+			"TOGoS_Hash_": "lib/",
+			"TOGoS_TreeHasher": "lib/"
+		}
+	},
+	"require-dev": {
+		"phpunit/phpunit": "^4.8.35"
 	}
-    }
 }
