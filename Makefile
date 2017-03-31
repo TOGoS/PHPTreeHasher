@@ -1,6 +1,10 @@
 default: run-unit-tests
 
+clean:
+	rm -rf composer.lock vendor
+
 .PHONY:
+	clean \
 	default \
 	run-unit-tests
 
